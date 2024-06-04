@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:14-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=db
+    networks:
+      - network-qqq
+  test:
+    build: .
+    container_name: test
+    image: polinamiki/test
+    restart: always
+    ports:
+      - '8080:8080'
+    networks:
+      - network-qqq
+
+networks:
+  network-qqq:
